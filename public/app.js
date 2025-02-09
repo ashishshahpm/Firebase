@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     myPost.onSnapshot(doc => {
             console.log("📢 Firestore snapshot triggered!");
             const data = doc.data();
-            console.log("📝 Retrieved data:", data);
-            document.write(data.Question1 + `<br>`)
-            document.write(data.views + `<br>`)
+            document.querySelector('#Question1').innerHTML = data.Question1
     });
 });
+
+function updatePost(e)
+ {
+    const db =firebase.firestore();
+    const myPost = db.collection('reflections').doc('firstReflection');
+    myPost.update({ Question1: e.target.value })
+ }
